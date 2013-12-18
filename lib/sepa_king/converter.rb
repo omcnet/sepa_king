@@ -1,7 +1,7 @@
 # encoding: utf-8
 module SEPA
   module Converter
-    def convert(*attributes, options)
+    def convert(options, *attributes)
       include InstanceMethods
 
       method_name = "convert_#{options[:to]}"

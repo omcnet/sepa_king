@@ -5,7 +5,7 @@ module SEPA
     extend Converter
 
     attr_accessor :name, :iban, :bic
-    convert :name, :to => :text
+    convert({:to => :text}, :name)
 
     validates_length_of :name, :within => 1..70
     validates_with BICValidator, IBANValidator
