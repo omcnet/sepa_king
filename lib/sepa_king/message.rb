@@ -34,7 +34,7 @@ module SEPA
       raise RuntimeError.new(errors.full_messages.join("\n")) unless valid?
       raise RuntimeError.new("Incompatible with schema #{schema_name}!") unless schema_compatible?(schema_name)
 
-      builder = Builder::XmlMarkup.new indent: 2
+      builder = Builder::XmlMarkup.new :indent => 2
       builder.instruct!
       builder.Document(xml_schema(schema_name)) do
         builder.__send__(xml_main_tag) do
