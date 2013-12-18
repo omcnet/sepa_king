@@ -17,11 +17,11 @@ module SEPA
     # Find groups of transactions which share the same values of some attributes
     def grouped_transactions
       transactions.group_by do |transaction|
-        { requested_date:   transaction.requested_date,
-          local_instrument: transaction.local_instrument,
-          sequence_type:    transaction.sequence_type,
-          batch_booking:    transaction.batch_booking,
-          account:          transaction.creditor_account || account
+        { :requested_date   => transaction.requested_date,
+          :local_instrument => transaction.local_instrument,
+          :sequence_type    => transaction.sequence_type,
+          :batch_booking    => transaction.batch_booking,
+          :account          => transaction.creditor_account || account
         }
       end
     end

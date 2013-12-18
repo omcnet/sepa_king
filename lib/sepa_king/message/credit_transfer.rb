@@ -11,9 +11,9 @@ module SEPA
     # Find groups of transactions which share the same values of some attributes
     def grouped_transactions
       transactions.group_by do |transaction|
-        { requested_date: transaction.requested_date,
-          batch_booking:  transaction.batch_booking,
-          service_level:  transaction.service_level
+        { :requested_date => transaction.requested_date,
+          :batch_booking  => transaction.batch_booking,
+          :service_level  => transaction.service_level
         }
       end
     end

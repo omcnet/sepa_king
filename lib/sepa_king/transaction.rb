@@ -5,13 +5,13 @@ module SEPA
     extend Converter
 
     attr_accessor :name, :iban, :bic, :amount, :reference, :remittance_information, :requested_date, :batch_booking
-    convert :name, :reference, :remittance_information, to: :text
-    convert :amount, to: :decimal
+    convert :name, :reference, :remittance_information, :to => :text
+    convert :amount, :to => :decimal
 
-    validates_length_of :name, within: 1..70
-    validates_length_of :reference, within: 1..35, allow_nil: true
-    validates_length_of :remittance_information, within: 1..140, allow_nil: true
-    validates_numericality_of :amount, greater_than: 0
+    validates_length_of :name, :within => 1..70
+    validates_length_of :reference, :within => 1..35, :allow_nil => true
+    validates_length_of :remittance_information, :within => 1..140, :allow_nil => true
+    validates_numericality_of :amount, :greater_than => 0
     validates_presence_of :requested_date
     validates_inclusion_of :batch_booking, :in => [true, false]
     validates_with BICValidator, IBANValidator
