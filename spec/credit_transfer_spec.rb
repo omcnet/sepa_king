@@ -50,7 +50,7 @@ describe SEPA::CreditTransfer do
           sct.add_transaction name:                   'Telekomiker AG',
                               bic:                    'PBNKDEFF370',
                               iban:                   'DE37112589611964645802',
-                              amount:                 102.50,
+                              amount:                 10250,
                               reference:              'XYZ-1234/123',
                               remittance_information: 'Rechnung vom 22.08.2013'
 
@@ -75,7 +75,7 @@ describe SEPA::CreditTransfer do
           sct.add_transaction name:                   'Telekomiker AG',
                               bic:                    'PBNKDEFF370',
                               iban:                   'DE37112589611964645802',
-                              amount:                 102.50,
+                              amount:                 10250,
                               reference:              'XYZ-1234/123',
                               remittance_information: 'Rechnung vom 22.08.2013'
 
@@ -98,13 +98,13 @@ describe SEPA::CreditTransfer do
           sct.add_transaction name:                   'Telekomiker AG',
                               bic:                    'PBNKDEFF370',
                               iban:                   'DE37112589611964645802',
-                              amount:                 102.50,
+                              amount:                 10250,
                               reference:              'XYZ-1234/123',
                               remittance_information: 'Rechnung vom 22.08.2013'
 
           sct.add_transaction name:                   'Amazonas GmbH',
                               iban:                   'DE27793589132923472195',
-                              amount:                 59.00,
+                              amount:                 5900,
                               reference:              'XYZ-5678/456',
                               remittance_information: 'Rechnung vom 21.08.2013'
 
@@ -140,7 +140,7 @@ describe SEPA::CreditTransfer do
         end
 
         it 'should contain <CtrlSum>' do
-          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf/CtrlSum', '161.50')
+          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf/CtrlSum', '16150')
         end
 
         it 'should contain <Dbtr>' do
@@ -161,8 +161,8 @@ describe SEPA::CreditTransfer do
         end
 
         it 'should contain <Amt>' do
-          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf/CdtTrfTxInf[1]/Amt/InstdAmt', '102.50')
-          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf/CdtTrfTxInf[2]/Amt/InstdAmt', '59.00')
+          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf/CdtTrfTxInf[1]/Amt/InstdAmt', '10250')
+          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf/CdtTrfTxInf[2]/Amt/InstdAmt', '5900')
         end
 
         it 'should contain <CdtrAgt> for every BIC given' do
@@ -233,10 +233,10 @@ describe SEPA::CreditTransfer do
         subject do
           sct = credit_transfer
 
-          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 1, batch_booking: false, amount: 1)
-          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 1, batch_booking: true,  amount: 2)
-          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 2, batch_booking: false, amount: 4)
-          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 2, batch_booking: true,  amount: 8)
+          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 1, batch_booking: false, amount: 100)
+          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 1, batch_booking: true,  amount: 200)
+          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 2, batch_booking: false, amount: 400)
+          sct.add_transaction(credit_transfer_transaction.merge requested_date: Date.today + 2, batch_booking: true,  amount: 800)
 
           sct.to_xml
         end
@@ -256,10 +256,10 @@ describe SEPA::CreditTransfer do
         end
 
         it 'should have multiple control sums' do
-          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[1]/CtrlSum', '1.00')
-          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[2]/CtrlSum', '2.00')
-          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[3]/CtrlSum', '4.00')
-          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[4]/CtrlSum', '8.00')
+          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[1]/CtrlSum', '100')
+          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[2]/CtrlSum', '200')
+          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[3]/CtrlSum', '400')
+          subject.should have_xml('//Document/CstmrCdtTrfInitn/PmtInf[4]/CtrlSum', '800')
         end
       end
     end

@@ -34,7 +34,7 @@ module SEPA
           builder.PmtMtd('DD')
           builder.BtchBookg(group[:batch_booking])
           builder.NbOfTxs(transactions.length)
-          builder.CtrlSum('%.2f' % amount_total(transactions))
+          builder.CtrlSum(amount_total(transactions))
           builder.PmtTpInf do
             builder.SvcLvl do
               builder.Cd('SEPA')
@@ -90,7 +90,7 @@ module SEPA
         builder.PmtId do
           builder.EndToEndId(transaction.reference)
         end
-        builder.InstdAmt('%.2f' % transaction.amount, :Ccy => 'EUR')
+        builder.InstdAmt(transaction.amount, :Ccy => 'EUR')
         builder.DrctDbtTx do
           builder.MndtRltdInf do
             builder.MndtId(transaction.mandate_id)

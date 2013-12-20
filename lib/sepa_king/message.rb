@@ -79,7 +79,7 @@ module SEPA
         builder.MsgId(message_identification)
         builder.CreDtTm(Time.now.iso8601)
         builder.NbOfTxs(transactions.length)
-        builder.CtrlSum('%.2f' % amount_total)
+        builder.CtrlSum(amount_total)
         builder.InitgPty do
           builder.Nm(account.name)
         end

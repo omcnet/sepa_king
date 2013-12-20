@@ -52,7 +52,7 @@ describe SEPA::DirectDebit do
           sdd.add_transaction name:                      'Zahlemann & Söhne GbR',
                               bic:                       'SPUEDE2UXXX',
                               iban:                      'DE21500500009876543210',
-                              amount:                    39.99,
+                              amount:                    3999,
                               reference:                 'XYZ/2013-08-ABO/12345',
                               remittance_information:    'Unsere Rechnung vom 10.08.2013',
                               mandate_id:                'K-02-2011-12345',
@@ -79,7 +79,7 @@ describe SEPA::DirectDebit do
           sdd.add_transaction name:                      'Zahlemann & Söhne GbR',
                               bic:                       'SPUEDE2UXXX',
                               iban:                      'DE21500500009876543210',
-                              amount:                    39.99,
+                              amount:                    3999,
                               reference:                 'XYZ/2013-08-ABO/12345',
                               remittance_information:    'Unsere Rechnung vom 10.08.2013',
                               mandate_id:                'K-02-2011-12345',
@@ -104,7 +104,7 @@ describe SEPA::DirectDebit do
           sdd.add_transaction name:                      'Zahlemann & Söhne GbR',
                               bic:                       'SPUEDE2UXXX',
                               iban:                      'DE21500500009876543210',
-                              amount:                    39.99,
+                              amount:                    3999,
                               reference:                 'XYZ/2013-08-ABO/12345',
                               remittance_information:    'Unsere Rechnung vom 10.08.2013',
                               mandate_id:                'K-02-2011-12345',
@@ -112,7 +112,7 @@ describe SEPA::DirectDebit do
 
           sdd.add_transaction name:                      'Meier & Schulze oHG',
                               iban:                      'DE68210501700012345678',
-                              amount:                    750.00,
+                              amount:                    75000,
                               reference:                 'XYZ/2013-08-ABO/6789',
                               remittance_information:    'Vielen Dank für Ihren Einkauf!',
                               mandate_id:                'K-08-2010-42123',
@@ -150,7 +150,7 @@ describe SEPA::DirectDebit do
         end
 
         it 'should contain <CtrlSum>' do
-          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf/CtrlSum', '789.99')
+          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf/CtrlSum', '78999')
         end
 
         it 'should contain <Cdtr>' do
@@ -175,8 +175,8 @@ describe SEPA::DirectDebit do
         end
 
         it 'should contain <InstdAmt>' do
-          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf/DrctDbtTxInf[1]/InstdAmt', '39.99')
-          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf/DrctDbtTxInf[2]/InstdAmt', '750.00')
+          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf/DrctDbtTxInf[1]/InstdAmt', '3999')
+          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf/DrctDbtTxInf[2]/InstdAmt', '75000')
         end
 
         it 'should contain <MndtId>' do
@@ -297,10 +297,10 @@ describe SEPA::DirectDebit do
         subject do
           sdd = direct_debit
 
-          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 1, sequence_type: 'OOFF', amount: 1)
-          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 1, sequence_type: 'FNAL', amount: 2)
-          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 2, sequence_type: 'OOFF', amount: 4)
-          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 2, sequence_type: 'FNAL', amount: 8)
+          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 1, sequence_type: 'OOFF', amount: 100)
+          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 1, sequence_type: 'FNAL', amount: 200)
+          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 2, sequence_type: 'OOFF', amount: 400)
+          sdd.add_transaction(direct_debt_transaction.merge requested_date: Date.today + 2, sequence_type: 'FNAL', amount: 800)
 
           sdd.to_xml
         end
@@ -320,10 +320,10 @@ describe SEPA::DirectDebit do
         end
 
         it 'should have multiple control sums' do
-          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[1]/CtrlSum', '1.00')
-          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[2]/CtrlSum', '2.00')
-          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[3]/CtrlSum', '4.00')
-          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[4]/CtrlSum', '8.00')
+          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[1]/CtrlSum', '100')
+          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[2]/CtrlSum', '200')
+          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[3]/CtrlSum', '400')
+          subject.should have_xml('//Document/CstmrDrctDbtInitn/PmtInf[4]/CtrlSum', '800')
         end
       end
 
