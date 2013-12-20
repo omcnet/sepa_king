@@ -14,17 +14,17 @@ describe SEPA::Message do
   describe :amount_total do
     subject do
       message = DummyMessage.new
-      message.add_transaction amount: 110
-      message.add_transaction amount: 220
+      message.add_transaction amount: 1.1
+      message.add_transaction amount: 2.2
       message
     end
 
     it 'should sum up all transactions' do
-      subject.amount_total.should == 330
+      subject.amount_total.should == 3.3
     end
 
     it 'should sum up selected transactions' do
-      subject.amount_total([subject.transactions[0]]).should == 110
+      subject.amount_total([subject.transactions[0]]).should == 1.1
     end
   end
 

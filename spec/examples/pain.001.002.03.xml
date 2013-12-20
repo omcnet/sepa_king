@@ -15,7 +15,7 @@
       <PmtMtd>TRF</PmtMtd>
       <BtchBookg>true</BtchBookg>
       <NbOfTxs>2</NbOfTxs>
-      <CtrlSum>665586</CtrlSum>
+      <CtrlSum>6655.86</CtrlSum>
       <PmtTpInf>
         <SvcLvl>
           <Cd>SEPA</Cd>
@@ -41,7 +41,7 @@
           <EndToEndId>OriginatorID1234</EndToEndId>
         </PmtId>
         <Amt>
-          <InstdAmt Ccy="EUR">654314</InstdAmt>
+          <InstdAmt Ccy="EUR">6543.14</InstdAmt>
         </Amt>
         <CdtrAgt>
           <FinInstnId>
@@ -65,7 +65,7 @@
           <EndToEndId>OriginatorID1235</EndToEndId>
         </PmtId>
         <Amt>
-          <InstdAmt Ccy="EUR">11272</InstdAmt>
+          <InstdAmt Ccy="EUR">112.72</InstdAmt>
         </Amt>
         <CdtrAgt>
           <FinInstnId>

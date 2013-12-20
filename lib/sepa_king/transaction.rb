@@ -6,6 +6,7 @@ module SEPA
 
     attr_accessor :name, :iban, :bic, :amount, :reference, :remittance_information, :requested_date, :batch_booking
     convert({:to => :text}, :name, :reference, :remittance_information)
+    convert({:to => :decimal}, :amount)
 
     validates_length_of :name, :within => 1..70
     validates_length_of :reference, :within => 1..35, :allow_nil => true
